@@ -1,7 +1,7 @@
 # Amazon Reviews — Analytics with Apache Spark & Cassandra
 
 Continuation of the previous homework using the same Amazon Reviews dataset (verified purchases, ~46k rows).
-PySpark transforms and loads data into Cassandra, FastAPI exposes it via REST with Redis caching (TTL 5 min).
+PySpark transforms and loads data into Cassandra, FastAPI exposes it via REST with Redis caching.
 
 ## Stack
 
