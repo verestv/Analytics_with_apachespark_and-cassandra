@@ -1,0 +1,105 @@
+(Apache_spark_cassandra_hw7) ivan@DESKTOP-HLUUP8P:~/Apache_spark_cassandra_hw7/etl_to_cassandra$ python main.py 
+
+════════════════════════════════════════════════════════════
+  Amazon Reviews → Cassandra ETL
+════════════════════════════════════════════════════════════
+
+  [STAGE 1] Starting Spark session...
+WARNING: Using incubator modules: jdk.incubator.vector
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+26/04/27 19:08:24 WARN Utils: Your hostname, DESKTOP-HLUUP8P, resolves to a loopback address: 127.0.1.1; using 172.18.84.207 instead (on interface eth0)
+26/04/27 19:08:24 WARN Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+Using Spark's default log4j profile: org/apache/spark/log4j2-defaults.properties
+Setting default log level to "WARN".
+To adjust logging level use sc.setLogLevel(newLevel). For SparkR, use setLogLevel(newLevel).
+26/04/27 19:08:25 WARN NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+  ✓ Spark ready
+
+  [STAGE 2] Reading CSV: /home/ivan/Apache_spark_cassandra_hw7/etl_to_cassandra/amazon_reviews.csv
+  ✓ Raw rows: 396,000 (9s)                                                      
+
+  [STAGE 3] Cleaning data...
+  ✓ Clean rows: 396,000 (8s)                                                    
+
+  [STAGE 4] Filtering verified purchases...
+  ✓ Verified rows: 46,823                                                       
+
+  [STAGE 5] Connecting to Cassandra...
+  ✓ Connected → 127.0.0.1:9042 / keyspace: reviews
+
+════════════════════════════════════════════════════════════
+  STAGE 6 — Loading tables into Cassandra
+════════════════════════════════════════════════════════════
+
+────────────────────────────────────────────────────────────
+  [TABLE 1+2] reviews_by_product
+  → Inserting into reviews_by_product...
+    5,000 rows...  ⏱ 23s                                            (0 + 1) / 1]
+    10,000 rows...  ⏱ 39s
+    15,000 rows...  ⏱ 1m 3s
+    20,000 rows...  ⏱ 1m 19s
+    25,000 rows...  ⏱ 1m 37s
+    30,000 rows...  ⏱ 1m 59s
+    35,000 rows...  ⏱ 2m 22s
+    40,000 rows...  ⏱ 2m 42s
+    45,000 rows...  ⏱ 3m 3s
+  ✅  reviews_by_product done | 46,823 rows | ⏱ 3m 12s
+
+────────────────────────────────────────────────────────────
+  [TABLE 3] reviews_by_customer
+  → Inserting into reviews_by_customer...
+    5,000 rows...  ⏱ 27s============================================(1 + 0) / 1]
+    10,000 rows...  ⏱ 43s
+    15,000 rows...  ⏱ 1m 2s
+    20,000 rows...  ⏱ 1m 20s
+    25,000 rows...  ⏱ 1m 36s
+    30,000 rows...  ⏱ 1m 57s
+    35,000 rows...  ⏱ 2m 21s
+    40,000 rows...  ⏱ 2m 40s
+    45,000 rows...  ⏱ 3m 3s
+  ✅  reviews_by_customer done | 46,823 rows | ⏱ 3m 10s
+
+────────────────────────────────────────────────────────────
+  [TABLE 4] top_products_by_period
+  → Inserting into top_products_by_period...
+    5,000 rows...  ⏱ 17s                                            (0 + 1) / 1]
+    10,000 rows...  ⏱ 25s
+    15,000 rows...  ⏱ 35s
+    20,000 rows...  ⏱ 46s
+    25,000 rows...  ⏱ 56s
+    30,000 rows...  ⏱ 1m 4s
+    35,000 rows...  ⏱ 1m 12s
+    40,000 rows...  ⏱ 1m 22s
+  ✅  top_products_by_period done | 42,326 rows | ⏱ 1m 26s
+
+────────────────────────────────────────────────────────────
+  [TABLE 5] top_customers_by_period
+  → Inserting into top_customers_by_period...
+    5,000 rows...  ⏱ 14s                                            (0 + 1) / 1]
+    10,000 rows...  ⏱ 25s
+    15,000 rows...  ⏱ 37s
+    20,000 rows...  ⏱ 45s
+    25,000 rows...  ⏱ 54s
+    30,000 rows...  ⏱ 1m 3s
+    35,000 rows...  ⏱ 1m 11s
+  ✅  top_customers_by_period done | 36,836 rows | ⏱ 1m 14s
+
+────────────────────────────────────────────────────────────
+  [TABLE 6] top_haters_by_period
+  → Inserting into top_haters_by_period...
+  ✅  top_haters_by_period done | 4,989 rows | ⏱ 14s                (0 + 1) / 1]
+
+────────────────────────────────────────────────────────────
+  [TABLE 7] top_backers_by_period
+  → Inserting into top_backers_by_period...
+    5,000 rows...  ⏱ 16s                                            (0 + 1) / 1]
+    10,000 rows...  ⏱ 27s
+    15,000 rows...  ⏱ 36s
+    20,000 rows...  ⏱ 45s
+    25,000 rows...  ⏱ 55s
+    30,000 rows...  ⏱ 1m 3s
+  ✅  top_backers_by_period done | 30,038 rows | ⏱ 1m 3s
+
+════════════════════════════════════════════════════════════
+  ✅  All done! Total time: 10m 51s
+════════════════════════════════════════════════════════════
